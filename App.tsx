@@ -2,24 +2,20 @@ import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as SecureStore from "expo-secure-store";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import AuthScreen from "./AuthScreen";
 import MainAppNavigation from "./MainAppNavigation";
 
 SplashScreen.preventAutoHideAsync();
 
-const Stack = createStackNavigator();
-
 export default function App() {
   const [isAppReady, setIsAppReady] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
     const prepareApp = async () => {
       const token = await SecureStore.getItemAsync("auth-token");
       if (!token) {
-        setIsAuthenticated(true);
         setIsAppReady(true);
         return;
       }
@@ -29,6 +25,7 @@ export default function App() {
         },
       });
       if (isAuthenticatedRes.ok) {
+        setAccessToken(token);
         setIsAuthenticated(true);
       }
       setIsAppReady(true);
@@ -47,16 +44,10 @@ export default function App() {
     return null;
   }
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {isAuthenticated ? (
-          <Stack.Screen name="Aplikacija" component={MainAppNavigation} options={{ headerShown: false }} />
-        ) : (
-          <Stack.Screen name="Prijava" component={AuthScreen} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+  return isAuthenticated ? (
+    <MainAppNavigation />
+  ) : (
+    <AuthScreen setIsAuthenticated={setIsAuthenticated} setAccessToken={setAccessToken} />
   );
 }
 
