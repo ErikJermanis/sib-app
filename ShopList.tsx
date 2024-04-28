@@ -1,14 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import appColors from "./appColors";
 
 const ShopList = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <Text>Popis za kupnju</Text>
-        <StatusBar style="auto" />
-      </View>
+    <SafeAreaView style={styles.wrapper}>
+      <Text>Popis za kupnju</Text>
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 };
@@ -16,10 +15,10 @@ const ShopList = () => {
 export default ShopList;
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
-    backgroundColor: "#fcebde",
-    // alignItems: "center",
-    // justifyContent: "center",
+    backgroundColor: appColors.magnolia,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

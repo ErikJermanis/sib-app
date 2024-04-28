@@ -3,6 +3,8 @@ import ShopList from "./ShopList";
 import Wishlist from "./Wishlist";
 import TabBarIcon from "./components/TabBarIcon";
 import { NavigationContainer } from "@react-navigation/native";
+import Reminders from "./Reminders";
+import appColors from "./appColors";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,13 +14,15 @@ function MainAppNavigation() {
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: "#fcebde",
+            backgroundColor: appColors.charcoal,
           },
-          tabBarActiveTintColor: "#e91e63",
+          tabBarActiveTintColor: appColors.appleGreen,
+          tabBarInactiveTintColor: appColors.magnolia,
+          tabBarLabelStyle: { fontSize: 16, fontWeight: "bold" },
         }}
       >
         <Tab.Screen
-          name="Popis za kupnju"
+          name="Kupovina"
           component={ShopList}
           options={{
             headerShown: false,
@@ -26,11 +30,19 @@ function MainAppNavigation() {
           }}
         />
         <Tab.Screen
-          name="Naša lista želja"
+          name="Želje"
           component={Wishlist}
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+          }}
+        />
+        <Tab.Screen
+          name="Podsjetnici"
+          component={Reminders}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
           }}
         />
       </Tab.Navigator>

@@ -3,16 +3,16 @@ import { StyleSheet, Text, View } from "react-native";
 import appColors from "./appColors";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Wishlist = () => {
+const Reminders = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Text>Naša lista želja</Text>
+      <Text>Podsjetnici</Text>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 };
 
-export default Wishlist;
+export default Reminders;
 
 const styles = StyleSheet.create({
   wrapper: {
