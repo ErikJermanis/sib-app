@@ -22,7 +22,7 @@ function MainAppNavigation() {
           component={ShopList}
           options={{
             headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+            tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
           }}
         />
         <Tab.Screen
@@ -30,7 +30,7 @@ function MainAppNavigation() {
           component={Wishlist}
           options={{
             headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
+            tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
           }}
         />
       </Tab.Navigator>

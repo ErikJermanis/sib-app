@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import * as SecureStore from "expo-secure-store";
 import AuthScreen from "./AuthScreen";
@@ -50,12 +49,3 @@ export default function App() {
     <AuthScreen setIsAuthenticated={setIsAuthenticated} setAccessToken={setAccessToken} />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
