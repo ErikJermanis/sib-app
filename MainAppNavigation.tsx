@@ -10,7 +10,7 @@ import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-function MainAppNavigation() {
+function MainAppNavigation({ accessToken }: { accessToken: string }) {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -42,7 +42,7 @@ function MainAppNavigation() {
         />
         <Tab.Screen
           name="Želje"
-          component={Wishlist}
+          children={() => <Wishlist accessToken={accessToken} />}
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,

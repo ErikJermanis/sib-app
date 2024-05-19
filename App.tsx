@@ -44,7 +44,7 @@ export default function App() {
   }
 
   return isAuthenticated ? (
-    <MainAppNavigation />
+    <MainAppNavigation accessToken={accessToken} />
   ) : (
     <AuthScreen setIsAuthenticated={setIsAuthenticated} setAccessToken={setAccessToken} />
   );
