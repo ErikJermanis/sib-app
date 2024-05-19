@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: appColors.magnolia,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });

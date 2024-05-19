@@ -5,6 +5,8 @@ import TabBarIcon from "./components/TabBarIcon";
 import { NavigationContainer } from "@react-navigation/native";
 import Reminders from "./Reminders";
 import appColors from "./appColors";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Platform } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,13 +14,22 @@ function MainAppNavigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        sceneContainerStyle={{ backgroundColor: appColors.magnolia }}
         screenOptions={{
           tabBarStyle: {
             backgroundColor: appColors.charcoal,
+            position: "absolute",
+            bottom: Platform.OS === "ios" ? 25 : 5,
+            left: 5,
+            right: 5,
+            elevation: 0,
+            borderRadius: 25,
+            height: 45,
           },
           tabBarActiveTintColor: appColors.appleGreen,
           tabBarInactiveTintColor: appColors.magnolia,
           tabBarLabelStyle: { fontSize: 16, fontWeight: "bold" },
+          tabBarShowLabel: false,
         }}
       >
         <Tab.Screen
