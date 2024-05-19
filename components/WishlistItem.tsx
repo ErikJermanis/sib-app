@@ -2,28 +2,44 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { WishlistRecord } from "../global.types";
 import appColors from "../appColors";
 import { Dispatch, SetStateAction } from "react";
+import { deleteRecord, modifyRecordCompleted } from "../crud";
 
 type Props = {
+  accessToken: string;
   item: WishlistRecord;
   isSelected: boolean;
   setSelectedId: Dispatch<SetStateAction<number | null>>;
+  setRecords: Dispatch<SetStateAction<WishlistRecord[] | null | undefined>>;
 };
 
-const WishlistItem = ({ item, isSelected, setSelectedId }: Props) => {
-  const handleSelect = () => {
-    setSelectedId(item.id);
+const WishlistItem = ({ item, isSelected, setSelectedId, accessToken, setRecords }: Props) => {
+  const handleSelect = async () => {
+    if (item.completed) {
+      setRecords((prev) => prev!.map((record) => (record.id === item.id ? { ...record, completed: false } : record)));
+      await modifyRecordCompleted(accessToken, false, item.id);
+    } else {
+      setSelectedId(item.id);
+    }
   };
 
   const handleCancel = () => {
     setSelectedId(null);
   };
 
-  const handleComplete = () => {};
+  const handleComplete = async () => {
+    setSelectedId(null);
+    setRecords((prev) => prev!.map((record) => (record.id === item.id ? { ...record, completed: true } : record)));
+    await modifyRecordCompleted(accessToken, true, item.id);
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    setSelectedId(null);
+    setRecords((prev) => prev!.filter((record) => record.id !== item.id));
+    await deleteRecord(accessToken, item.id);
+  };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={item.completed ? completedWrapperStyle : styles.wrapper}>
       {isSelected ? (
         <View style={styles.menu}>
           <Pressable onPress={handleCancel} style={styles.menuButton}>
@@ -37,8 +53,8 @@ const WishlistItem = ({ item, isSelected, setSelectedId }: Props) => {
           </Pressable>
         </View>
       ) : (
-        <Pressable style={styles.pressable} onLongPress={handleSelect}>
-          <Text>{item.text}</Text>
+        <Pressable style={item.completed ? completedPressableStyle : styles.pressable} onLongPress={handleSelect}>
+          <Text style={{ textDecorationLine: item.completed ? "line-through" : "none" }}>{item.text}</Text>
         </Pressable>
       )}
     </View>
@@ -49,6 +65,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: 10,
     marginHorizontal: 10,
+    borderRadius: 10,
   },
   pressable: {
     display: "flex",
@@ -86,6 +103,14 @@ const styles = StyleSheet.create({
   deleteText: {
     color: appColors.danger,
   },
+});
+
+const completedWrapperStyle = StyleSheet.compose(styles.wrapper, {
+  opacity: 0.5,
+});
+
+const completedPressableStyle = StyleSheet.compose(styles.pressable, {
+  backgroundColor: appColors.officeGreen,
 });
 
 export default WishlistItem;

@@ -16,13 +16,6 @@ import { WishlistRecord } from "./global.types";
 import WishlistItem from "./components/WishlistItem";
 import { getRecords } from "./crud";
 
-const items: WishlistRecord[] = Array.from({ length: 100 }).map((_, index) => ({
-  id: index,
-  text: `Ići u Dumboku, uzeti naš roštilj i napraviti lijepi ljubavni ručak - ${index + 1}`,
-  createdAt: "",
-  updatedAt: "",
-}));
-
 const Wishlist = ({ accessToken }: { accessToken: string }) => {
   const [newWish, setNewWish] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -60,7 +53,13 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
   };
 
   const renderItem: ListRenderItem<WishlistRecord> = ({ item }) => (
-    <WishlistItem item={item} isSelected={selectedId === item.id} setSelectedId={setSelectedId} />
+    <WishlistItem
+      accessToken={accessToken}
+      item={item}
+      isSelected={selectedId === item.id}
+      setSelectedId={setSelectedId}
+      setRecords={setRecords}
+    />
   );
 
   return (
@@ -70,7 +69,7 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
           <FlatList
             data={records}
             renderItem={renderItem}
-            extraData={selectedId}
+            extraData={[selectedId, records]}
             keyExtractor={(item) => String(item.id)}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
