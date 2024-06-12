@@ -63,7 +63,7 @@ const WishlistItem = ({ item, isSelected, setSelectedId, accessToken, setRecords
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 10,
     borderRadius: 10,
   },
@@ -71,13 +71,16 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
     borderRadius: 10,
-    borderColor: appColors.charcoal,
     backgroundColor: appColors.magnoliaDark,
     paddingVertical: 5,
     paddingHorizontal: 8,
     minHeight: 40,
+    shadowColor: appColors.charcoal,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   menu: {
     display: "flex",

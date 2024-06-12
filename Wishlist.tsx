@@ -89,7 +89,11 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
         <StatusBar style="auto" />
       </SafeAreaView>
       {Platform.OS === "ios" && (
-        <InputAccessoryView nativeID="wishInputId" backgroundColor={appColors.night}>
+        <InputAccessoryView
+          nativeID="wishInputId"
+          backgroundColor={appColors.night}
+          style={styles.inputAccessoryWrapper}
+        >
           <Text style={styles.inputAccessoryText}>{newWish}</Text>
         </InputAccessoryView>
       )}
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     height: "100%",
+    paddingTop: 10,
   },
   buttonContainer: {
     height: Platform.OS === "ios" ? 40 : "auto",
@@ -116,12 +121,16 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: appColors.night,
     color: appColors.magnolia,
-    paddingVertical: Platform.OS === "ios" ? 12 : 3,
+    paddingVertical: Platform.OS === "ios" ? 16 : 3,
     paddingHorizontal: Platform.OS === "ios" ? 14 : 10,
     borderRadius: 6,
     marginBottom: Platform.OS === "ios" ? 43 : 0,
   },
+  inputAccessoryWrapper: {
+    padding: 10,
+  },
   inputAccessoryText: {
     color: appColors.magnolia,
+    fontSize: 18,
   },
 });
