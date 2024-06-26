@@ -1,14 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  FlatList,
-  InputAccessoryView,
-  ListRenderItem,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, ListRenderItem, StyleSheet, TextInput, View } from "react-native";
 import appColors from "./appColors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
@@ -88,15 +79,6 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
         </View>
         <StatusBar style="auto" />
       </SafeAreaView>
-      {Platform.OS === "ios" && (
-        <InputAccessoryView
-          nativeID="wishInputId"
-          backgroundColor={appColors.night}
-          style={styles.inputAccessoryWrapper}
-        >
-          <Text style={styles.inputAccessoryText}>{newWish}</Text>
-        </InputAccessoryView>
-      )}
     </>
   );
 };
@@ -114,23 +96,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   buttonContainer: {
-    height: Platform.OS === "ios" ? 40 : "auto",
-    paddingVertical: 5,
     paddingHorizontal: 15,
   },
   input: {
     backgroundColor: appColors.night,
     color: appColors.magnolia,
-    paddingVertical: Platform.OS === "ios" ? 16 : 3,
-    paddingHorizontal: Platform.OS === "ios" ? 14 : 10,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
     borderRadius: 6,
-    marginBottom: Platform.OS === "ios" ? 43 : 0,
-  },
-  inputAccessoryWrapper: {
-    padding: 10,
-  },
-  inputAccessoryText: {
-    color: appColors.magnolia,
-    fontSize: 18,
   },
 });
