@@ -18,7 +18,7 @@ export default function App() {
         setIsAppReady(true);
         return;
       }
-      const isAuthenticatedRes = await fetch("https://sib-api.erikjermanis.me/is-authenticated", {
+      const isAuthenticatedRes = await fetch("https://sib.erikjermanis.me/api/authenticate", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

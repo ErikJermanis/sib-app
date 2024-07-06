@@ -71,7 +71,6 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
               placeholder="Dodaj novu želju"
               style={styles.input}
               placeholderTextColor={appColors.magnolia}
-              inputAccessoryViewID="wishInputId"
               onChangeText={setNewWish}
               onSubmitEditing={handleSubmit}
             />

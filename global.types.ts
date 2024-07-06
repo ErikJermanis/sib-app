@@ -6,4 +6,11 @@ type WishlistRecord = {
   updatedAt: string;
 };
 
-export { WishlistRecord };
+type ItemsRecord = {
+  id: number;
+  item: string;
+  completed: boolean;
+  rank: number;
+};
+
+export { WishlistRecord, ItemsRecord };

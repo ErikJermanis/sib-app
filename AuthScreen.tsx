@@ -21,7 +21,7 @@ const AuthScreen = ({ setIsAuthenticated, setAccessToken }: Props) => {
 
   const handleAuth = async () => {
     try {
-      const result = await fetch("https://sib-api.erikjermanis.me/authenticate", {
+      const result = await fetch("https://sib.erikjermanis.me/api/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

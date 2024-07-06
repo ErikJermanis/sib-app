@@ -3,7 +3,6 @@ import ShopList from "./ShopList";
 import Wishlist from "./Wishlist";
 import TabBarIcon from "./components/TabBarIcon";
 import { NavigationContainer } from "@react-navigation/native";
-import Reminders from "./Reminders";
 import appColors from "./appColors";
 
 const Tab = createBottomTabNavigator();
@@ -27,7 +26,7 @@ function MainAppNavigation({ accessToken }: { accessToken: string }) {
       >
         <Tab.Screen
           name="Kupovina"
-          component={ShopList}
+          children={() => <ShopList accessToken={accessToken} />}
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
@@ -39,14 +38,6 @@ function MainAppNavigation({ accessToken }: { accessToken: string }) {
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
-          }}
-        />
-        <Tab.Screen
-          name="Podsjetnici"
-          component={Reminders}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
           }}
         />
       </Tab.Navigator>
