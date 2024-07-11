@@ -13,6 +13,19 @@ const getRecords = async (accessToken: string) => {
   return null;
 };
 
+const createRecord = async (accessToken: string, text: string) => {
+  const res = await fetch("https://sib.erikjermanis.me/api/wishlist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ text }),
+  });
+
+  return res.ok;
+};
+
 const modifyRecordCompleted = async (accessToken: string, completed: boolean, id: number) => {
   const res = await fetch(`https://sib.erikjermanis.me/api/wishlist/${id}`, {
     method: "PUT",
@@ -87,6 +100,7 @@ const deleteCompletedItems = async (accessToken: string) => {
 
 export {
   getRecords,
+  createRecord,
   modifyRecordCompleted,
   deleteRecord,
   getItems,

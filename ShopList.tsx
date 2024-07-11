@@ -62,6 +62,7 @@ const ShopList = ({ accessToken }: { accessToken: string }) => {
             onSubmitEditing={handleSubmit}
             placeholder="nešto..."
             placeholderTextColor={appColors.magnoliaAccent2}
+            blurOnSubmit={false}
           />
         </View>
         {items?.some((item) => item.completed) && (

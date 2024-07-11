@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import { WishlistRecord } from "./global.types";
 import WishlistItem from "./components/WishlistItem";
-import { getRecords } from "./crud";
+import { createRecord, getRecords } from "./crud";
 
 const Wishlist = ({ accessToken }: { accessToken: string }) => {
   const [newWish, setNewWish] = useState("");
@@ -28,15 +28,8 @@ const Wishlist = ({ accessToken }: { accessToken: string }) => {
   };
 
   const handleSubmit = async () => {
-    const res = await fetch("https://sib-api.erikjermanis.me/records", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ text: newWish }),
-    });
-    if (res.ok) {
+    const success = await createRecord(accessToken, newWish);
+    if (success) {
       setNewWish("");
       const newRecords = await getRecords(accessToken);
       setRecords(newRecords);

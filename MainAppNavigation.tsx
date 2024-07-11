@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ShopList from "./ShopList";
 import Wishlist from "./Wishlist";
-import TabBarIcon from "./components/TabBarIcon";
 import { NavigationContainer } from "@react-navigation/native";
 import appColors from "./appColors";
+import ShoplistIcon from "./components/ShoplistIcon";
+import WishlistIcon from "./components/WishlistIcon";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ function MainAppNavigation({ accessToken }: { accessToken: string }) {
           children={() => <ShopList accessToken={accessToken} />}
           options={{
             headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
+            tabBarIcon: ({ color }) => <ShoplistIcon color={color} />,
           }}
         />
         <Tab.Screen
@@ -37,7 +38,7 @@ function MainAppNavigation({ accessToken }: { accessToken: string }) {
           children={() => <Wishlist accessToken={accessToken} />}
           options={{
             headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+            tabBarIcon: ({ color }) => <WishlistIcon color={color} />,
           }}
         />
       </Tab.Navigator>
